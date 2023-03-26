@@ -2,28 +2,32 @@ import styled from 'styled-components'
 import {BsGear} from 'react-icons/bs'
 import {HiMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {AiOutlineLogout} from 'react-icons/ai'
+import {IoChevronBack} from 'react-icons/io5'
 export const Navigation = () => {
   return (
     <Nav>
       <Items>
         <Spacer>
           <Item>
-            <Logo />
+            <IoChevronBack size={20} />
+            <p>43544345</p>
           </Item>
-          <Item>23939320</Item>
         </Spacer>
         <Spacer>
           <Item>
-            <HiOutlineBell />
+            <HiOutlineBell size={20}/>
+            <Indicatior>
+              5
+            </Indicatior>
           </Item>
           <Item>
-            <HiMagnifyingGlass />
+            <HiMagnifyingGlass size={20}/>
           </Item>
           <Item>
-            <BsGear />
+            <BsGear size={20}/>
           </Item>
           <Item>
-            <AiOutlineLogout />
+            <AiOutlineLogout size={20}/>
           </Item>
           <Item>
             <Profile>
@@ -41,17 +45,19 @@ export const Navigation = () => {
 }
 
 const Nav = styled.div`
-      flex: 1;
 `;
 
 const Items = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 50px;
 `;
 
 const Item = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
   cursor: pointer;
 `;
 
@@ -59,15 +65,6 @@ const Spacer = styled.div`
   display: flex;
   align-items: center;
   gap: 40px;
-`;
-
-const Logo = styled.div`
-  width: 150px;
-  height: 50px;
-  background-image: url('https://th.bing.com/th/id/R.877e091ae9b928c82e5cc618b96fda0d?rik=gopA5fbs497C4g&pid=ImgRaw&r=0'); 
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 `;
 
 const Profile = styled.div`
@@ -91,4 +88,19 @@ const Title = styled.h4`
 `;
 const Description = styled.h6`
   font-weight: 200;
+`;
+
+const Indicatior = styled.span`
+  font-size: 10px;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  position: absolute;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  top: -5px;
+  right: 0;
+  left: 8px;
 `;

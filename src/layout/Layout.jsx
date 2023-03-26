@@ -7,8 +7,10 @@ export const Layout = () => {
 	return (
 		<Container>
 			<Sidebar />
-			<Navigation />
-			<Outlet />
+			<Spacer>
+				<Navigation />
+				<Outlet />
+			</Spacer>
 		</Container>
   )
 }
@@ -16,4 +18,9 @@ export const Layout = () => {
 const Container = styled.div`
 		display: flex;
 		justify-content: space-between;
+`;
+
+const Spacer = styled.div`
+	flex: 1;
+	padding: 30px 50px;
 `;
