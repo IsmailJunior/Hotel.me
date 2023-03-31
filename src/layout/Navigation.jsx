@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import {selectStatus, selectUser} from '../features/user/userSlice'
+import {selectStatus, selectUser, logout} from '../features/user/userSlice'
 import {BsGear} from 'react-icons/bs'
 import {HiMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {AiOutlineLogout} from 'react-icons/ai'
@@ -9,13 +9,12 @@ export const Navigation = () =>
 {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-
+  const status = useSelector(selectStatus)
   const onLogoutClicked = ( e ) =>
   {
     e.preventDefault()
     dispatch( logout() )
     console.log('logout')
-    
   }
   return (
     <Nav>
@@ -39,17 +38,17 @@ export const Navigation = () =>
           <Item>
             <BsGear size={20}/>
           </Item>
-          <Item onClick={onLogoutClicked}>
+          {user ? <Item onClick={onLogoutClicked}>
             <AiOutlineLogout size={20}/>
-          </Item>
+          </Item> : null}
           <Item>
-            <Profile>
+            {user ? <Profile>
               <Image />
               <div>
                 <Title>Example</Title>
                 <Description>Example@mail.com</Description>
               </div>
-            </Profile>
+            </Profile> : null}
           </Item>
         </Spacer>
       </Items>

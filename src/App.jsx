@@ -17,7 +17,6 @@ import { ListsPage } from './Pages/ListsPage'
 
 function App ()
 {
-
   const user = useSelector( selectUser );
   const status = useSelector(selectStatus)
   console.log( user );
