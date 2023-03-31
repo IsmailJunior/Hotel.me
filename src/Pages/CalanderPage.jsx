@@ -1,6 +1,5 @@
-
 export const CalanderPage = () => {
   return (
-	<div>CalanderPage</div>
+	<h1>Calander</h1>
   )
 }

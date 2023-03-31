@@ -1,6 +1,6 @@
 
 export const InvitePage = () => {
   return (
-	<div>InvitePage</div>
+	<h1>Invite</h1>
   )
 }

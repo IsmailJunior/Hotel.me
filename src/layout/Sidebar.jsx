@@ -89,7 +89,7 @@ export const Sidebar = () => {
 const Container = styled.div`
   width: 250px;
   padding: 10px 0;
-  height: 100vh;
+  height: 600px;
   background-color: white;
 `;
 
@@ -110,6 +110,7 @@ const Items = styled.ul`
   padding: 10px 50px;
   height: 95%;
   gap: 10px;
+
 `;
 
 const Item = styled.li`
@@ -117,6 +118,7 @@ const Item = styled.li`
   border-radius: 10px;
   transition: all 300ms ease;
   cursor: pointer;
+  overflow: hidden;
 
   &:hover {
     background-color: #f0f0f0;

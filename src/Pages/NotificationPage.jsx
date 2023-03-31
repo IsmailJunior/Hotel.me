@@ -1,6 +1,6 @@
 
 export const NotificationPage = () => {
   return (
-	<div>NotificationPage</div>
+	<h1>Notification</h1>
   )
 }
