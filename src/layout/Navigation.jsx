@@ -8,7 +8,9 @@ import {IoChevronBack} from 'react-icons/io5'
 export const Navigation = () =>
 {
   const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const user = useSelector( selectUser )
+  const username = user?.email.split('@')[0]
+  console.log(username)
   const status = useSelector(selectStatus)
   const onLogoutClicked = ( e ) =>
   {
@@ -20,10 +22,6 @@ export const Navigation = () =>
     <Nav>
       <Items>
         <Spacer>
-          <Item>
-            <IoChevronBack size={20} />
-            <p>43544345</p>
-          </Item>
         </Spacer>
         <Spacer>
           <Item>
@@ -45,8 +43,8 @@ export const Navigation = () =>
             {user ? <Profile>
               <Image />
               <div>
-                <Title>Example</Title>
-                <Description>Example@mail.com</Description>
+                <Title>{username}</Title>
+                <Description>{user.email}</Description>
               </div>
             </Profile> : null}
           </Item>
@@ -61,6 +59,7 @@ const Nav = styled.div`
 
 const Items = styled.ul`
   display: flex;
+  height: 30px;
   justify-content: space-between;
   align-items: center;
 `;

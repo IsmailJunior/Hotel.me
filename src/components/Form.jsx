@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import {useRef, useState} from 'react'
-import { useDispatch } from 'react-redux'
-import {createUser, signIn} from '../features/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {createUser, signIn, selectStatus} from '../features/user/userSlice'
 export const Form = () =>
 {
-  const [isLogin, setIsLogin] = useState(false)
+  const [ isLogin, setIsLogin ] = useState( false )
   const dispatch = useDispatch();
+  const status = useSelector( selectStatus )
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -21,7 +22,7 @@ export const Form = () =>
     } else
     {
       console.log('Error empty fields!')
-    }
+      }
   }
 
   const onLoginClicked = (e) =>
@@ -36,7 +37,7 @@ export const Form = () =>
     } else
     {
       console.log('Error empty fields!')
-    }
+      }
   }
 
   const signUpView = <> <Container>
@@ -63,7 +64,7 @@ export const Form = () =>
         <Input ref={passwordRef} type='password' />
       </Section>
       </Container>
-      <Button onClick={ onLoginClicked } type='button'>Login</Button>
+    <Button onClick={ onLoginClicked } type='button'>Login</Button>
     <Description onClick={() => setIsLogin(true)}>Don't have an accout? sign up</Description>
   </>
 
@@ -100,6 +101,9 @@ const Section = styled.section`
 `;
 
 const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   border: none;
   margin-top: 10px;

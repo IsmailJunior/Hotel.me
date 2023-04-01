@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux'
-// import {selectUser} from '../features/user/userSlice'
+import {selectUser} from '../features/user/userSlice'
 import { AuthCard } from '../components/AuthCard';
 export const DashboardPage = () =>
 {  
+  const user = useSelector(selectUser)
   return (
-    <AuthCard />
+    <>
+      { !user ? <AuthCard /> : <h1>Hi {user.email}</h1>}
+    </>
   )
 };
 

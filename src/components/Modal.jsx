@@ -16,5 +16,5 @@ const Container = styled.div`
 	height: 300px;
 	border-radius: 15px;
 	background-color: white;
-	box-shadow: 0 0 25px rgba(0,0,0,0.2);
+	box-shadow: 0 0 5px rgba(0,0,0,0.4);
 `;
