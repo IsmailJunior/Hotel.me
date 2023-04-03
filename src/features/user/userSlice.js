@@ -3,10 +3,10 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { auth } from '../../config/firebase';
 const initialState = {
 	user: null,
+	displayName: null,
 	status: 'idle',
 	error: null
 };
-
 export const createUser = createAsyncThunk( 'user/createUser', async ( { email, password } ) =>
 {
 	try
@@ -36,11 +36,13 @@ const userSlice = createSlice( {
 		login: ( state, action ) =>
 		{
 			state.user = action.payload;
+			state.displayName = action.payload.email.split( '@' )[ 0 ]
 		},
 		logout: ( state, action ) =>
 		{
 			signOut( auth );
 			state.user = null;
+			state.displayName = null;
 			state.status = 'idle';
 		}
 	},
@@ -81,5 +83,6 @@ const userSlice = createSlice( {
 } );
 export const selectStatus = ( state ) => state.user.status;
 export const selectUser = ( state ) => state.user.user;
+export const selectDisplayName = ( state ) => state.user.displayName;
 export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;

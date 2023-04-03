@@ -87,6 +87,8 @@ export const Sidebar = () => {
 }
 
 const Container = styled.div`
+  position: sticky;
+  top: 0;
   width: 250px;
   padding: 10px 0;
   height: 600px;

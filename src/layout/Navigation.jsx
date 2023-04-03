@@ -1,17 +1,15 @@
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import {selectStatus, selectUser, logout} from '../features/user/userSlice'
+import {selectUser, selectDisplayName,logout} from '../features/user/userSlice'
 import {BsGear} from 'react-icons/bs'
 import {HiMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {AiOutlineLogout} from 'react-icons/ai'
-import {IoChevronBack} from 'react-icons/io5'
 export const Navigation = () =>
 {
   const dispatch = useDispatch()
   const user = useSelector( selectUser )
-  const username = user?.email.split('@')[0]
-  console.log(username)
-  const status = useSelector(selectStatus)
+  const displayName = useSelector(selectDisplayName)
+  console.log(displayName)
   const onLogoutClicked = ( e ) =>
   {
     e.preventDefault()
@@ -43,7 +41,7 @@ export const Navigation = () =>
             {user ? <Profile>
               <Image />
               <div>
-                <Title>{username}</Title>
+                <Title>{displayName}</Title>
                 <Description>{user.email}</Description>
               </div>
             </Profile> : null}
@@ -88,7 +86,7 @@ const Image = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  background-image: url('https://www.kevinashleyphotography.com/wp-content/uploads/2015/11/person.jpg'); 
+  background-image: url('https://th.bing.com/th/id/OIP.fpaUV35ECaGkz-YNCrBSwQHaHa?pid=ImgDet&rs=1'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
