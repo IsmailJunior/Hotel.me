@@ -1,16 +1,62 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../../config/axios';
+import axios from 'axios';
+
 const initialState = {
+	cityQuery: 'oregon',
 	hotels: [],
 	status: 'idel',
 	error: null
 };
 
-export const getHotels = createAsyncThunk( 'hotel/getHotels', async () =>
+
+let cityOptions = {
+	method: 'GET',
+	url: 'https://hotels-com-provider.p.rapidapi.com/v2/regions',
+	params: { locale: 'en_US', query: 'New york', domain: 'US' },
+	headers: {
+		'X-RapidAPI-Key': 'f6134ebf80msh0949d7f7e58dbd4p1d3c0djsn3d77abc69828',
+		'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
+	}
+};
+
+let hotelOptions = {
+	method: 'GET',
+	url: 'https://hotels-com-provider.p.rapidapi.com/v2/hotels/search',
+	params: {
+		domain: 'US',
+		sort_order: 'REVIEW',
+		locale: 'en_US',
+		checkout_date: '2023-09-27',
+		region_id: '2621',
+		adults_number: '1',
+		checkin_date: '2023-09-26',
+		available_filter: 'SHOW_AVAILABLE_ONLY',
+		meal_plan: 'FREE_BREAKFAST',
+		guest_rating_min: '8',
+		price_min: '10',
+		page_number: '1',
+		children_ages: '4,0,15',
+		amenities: 'WIFI,PARKING',
+		price_max: '1000',
+		lodging_type: 'HOTEL,HOSTEL,APART_HOTEL',
+		payment_type: 'PAY_LATER,FREE_CANCELLATION',
+		star_rating_ids: '3,4,5'
+	},
+	headers: {
+		'X-RapidAPI-Key': 'f6134ebf80msh0949d7f7e58dbd4p1d3c0djsn3d77abc69828',
+		'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
+	}
+};
+
+export const getHotels = createAsyncThunk( 'hotel/getHotels', async ( cityName ) =>
 {
 	try
 	{
-		const res = await axios.get( '/search' );
+		cityOptions.params.query = cityName;
+		const city = await axios.request( cityOptions );
+		const cityId = city.data.data[ 0 ].essId.sourceId;
+		hotelOptions.params.region_id = cityId;
+		const res = await axios.request( hotelOptions );
 		return res.data.properties;
 	} catch ( error )
 	{
@@ -21,7 +67,12 @@ export const getHotels = createAsyncThunk( 'hotel/getHotels', async () =>
 const hotelSlice = createSlice( {
 	name: 'hotel',
 	initialState,
-	reducers: {},
+	reducers: {
+		changeCity: ( state, action ) =>
+		{
+			state.cityQuery = action.payload;
+		}
+	},
 	extraReducers ( builder )
 	{
 		builder
@@ -43,5 +94,7 @@ const hotelSlice = createSlice( {
 
 export const selectHotels = ( state ) => state.hotel.hotels;
 export const selectStatus = ( state ) => state.hotel.status;
+export const selectCity = ( state ) => state.hotel.cityQuery;
 export const selectError = ( state ) => state.hotel.error;
+export const { changeCity } = hotelSlice.actions;
 export default hotelSlice.reducer;

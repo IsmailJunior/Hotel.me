@@ -52,32 +52,26 @@ const userSlice = createSlice( {
 			.addCase( createUser.pending, ( state, action ) =>
 			{
 				state.status = 'loading';
-				console.log( 'pending...' );
 			} )
 			.addCase( createUser.rejected, ( state, action ) =>
 			{
 				state.status = 'failed';
-				console.log( 'failed to create user.' );
 			} )
 			.addCase( createUser.fulfilled, ( state, action ) =>
 			{
 				state.status = 'success';
-				console.log( 'successfully creating new user.' );
 			} )
 			.addCase( signIn.pending, ( state, action ) =>
 			{
 				state.status = 'loading';
-				console.log( 'pending...' );
 			} )
 			.addCase( signIn.rejected, ( state, action ) =>
 			{
 				state.status = 'failed';
-				console.log( 'failed to sign in user.' );
 			} )
 			.addCase( signIn.fulfilled, ( state, action ) =>
 			{
 				state.status = 'success';
-				console.log( 'successfully signed in user.' );
 			} )
 	}
 } );

@@ -7,7 +7,7 @@ import {auth} from './config/firebase'
 
 
 import { Layout } from './layout/Layout'
-import { DashboardPage } from './Pages/DashboardPage'
+import { TrendingPage } from './Pages/TrendingPage'
 import { SearchPage } from './Pages/SearchPage'
 import { CalanderPage } from './Pages/CalanderPage'
 import {ClientsPage} from './Pages/ClientsPage'
@@ -36,7 +36,7 @@ function App ()
   return (
     <Routes>
       <Route path='/' element={ <Layout /> }>
-        <Route index element={ <DashboardPage /> } />
+        <Route index element={ <TrendingPage /> } />
         <Route path='search' element={<SearchPage />} />
         <Route path='calander' element={<CalanderPage />} />
         <Route path='clients' element={<ClientsPage />} />

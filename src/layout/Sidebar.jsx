@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {AiOutlineDashboard} from 'react-icons/ai'
+import {IoFlameOutline} from 'react-icons/io5'
 import {HiOutlineMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {BsCalendar2Date, BsPersonPlus} from 'react-icons/bs'
 import {IoPeopleOutline, IoHelpBuoy} from 'react-icons/io5'
@@ -16,8 +16,8 @@ export const Sidebar = () => {
           <Link to='/'>
           <Item>
           <NavItem>
-            <AiOutlineDashboard size={20}/>
-            <h4 style={{textAlign: 'left'}}>Dashboard</h4>
+            <IoFlameOutline size={20}/>
+            <h4 style={{textAlign: 'left'}}>Trending</h4>
           </NavItem>
         </Item>
           </Link>

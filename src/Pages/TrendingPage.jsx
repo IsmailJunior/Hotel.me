@@ -1,14 +1,21 @@
 import styled from 'styled-components'
-import { useSelector } from 'react-redux';
-import {selectHotels, selectStatus} from '../features/hotel/hotelSlice'
+import {useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import {selectHotels, selectStatus, getHotels, selectCity, changeCity} from '../features/hotel/hotelSlice'
 import {selectUser, selectDisplayName} from '../features/user/userSlice'
 import { AuthCard } from '../components/AuthCard';
 export const DashboardPage = () =>
 {  
+  const dispatch = useDispatch()
   const hotels = useSelector( selectHotels );
+  const city = useSelector(selectCity)
   const user = useSelector( selectUser )
   const displayName = useSelector( selectDisplayName )
-  console.log(hotels)
+  
+  const onCityClickHandler = ( cityName ) => {
+    dispatch( changeCity( cityName ) )
+    
+  }
   const content = <Container>
     
     { hotels?.map( ( hotel ) => (
@@ -20,10 +27,22 @@ export const DashboardPage = () =>
       </Hotel>
     ))}
   </Container>
+
+  const cities = ['New York', 'Florida']
+
+  useEffect( () =>
+  {
+    dispatch(getHotels(city))
+  }, [city])
   return (
     <>
       <h1>Welcome { displayName }</h1>
-      <h3>Domain: UAE</h3>
+      <h3>Domain: USA</h3>
+      <Chips>
+        { cities.map( ( city ) => (
+          <Chip onClick={() => onCityClickHandler(city)} key={city}>{city}</Chip>
+        ))}
+      </Chips>
       { !user ? <AuthCard /> :  content}
     </>
   )
@@ -63,4 +82,27 @@ const Background = styled.div`
   height: 200px;
   background-color: black;
   opacity: 60%;
+`;
+
+const Chips = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`
+const Chip = styled.div`
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  border: 1px gray solid;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+
+  &:active {
+    border-color: blue;
+  }
+  &:focus {
+    border-color: blue;
+  }
 `;
