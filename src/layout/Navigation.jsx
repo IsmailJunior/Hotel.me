@@ -4,6 +4,7 @@ import {selectUser, selectDisplayName,logout} from '../features/user/userSlice'
 import {BsGear} from 'react-icons/bs'
 import {HiMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {AiOutlineLogout} from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 export const Navigation = () =>
 {
   const dispatch = useDispatch()
@@ -28,9 +29,11 @@ export const Navigation = () =>
               5
             </Indicatior>
           </Item>
+          <Link to='/search'>
           <Item>
             <HiMagnifyingGlass size={20}/>
           </Item>
+          </Link>
           <Item>
             <BsGear size={20}/>
           </Item>

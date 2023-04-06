@@ -2,12 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
+	startDate: '2023-09-27',
+	endDate: '2023-09-26',
 	cityQuery: 'oregon',
 	hotels: [],
 	status: 'idel',
 	error: null
 };
-
 
 let cityOptions = {
 	method: 'GET',
@@ -48,7 +49,7 @@ let hotelOptions = {
 	}
 };
 
-export const getHotels = createAsyncThunk( 'hotel/getHotels', async ( cityName ) =>
+export const getHotels = createAsyncThunk( 'hotel/getHotels', async ( { cityName, startDate, endDate } ) =>
 {
 	try
 	{
@@ -56,6 +57,8 @@ export const getHotels = createAsyncThunk( 'hotel/getHotels', async ( cityName )
 		const city = await axios.request( cityOptions );
 		const cityId = city.data.data[ 0 ].essId.sourceId;
 		hotelOptions.params.region_id = cityId;
+		hotelOptions.params.checkin_date = startDate;
+		hotelOptions.params.checkout_date = endDate;
 		const res = await axios.request( hotelOptions );
 		return res.data.properties;
 	} catch ( error )
@@ -71,6 +74,11 @@ const hotelSlice = createSlice( {
 		changeCity: ( state, action ) =>
 		{
 			state.cityQuery = action.payload;
+		},
+		changeDate: ( state, action ) =>
+		{
+			state.startDate = action.payload.startDate;
+			state.endDate = action.payload.endDate
 		}
 	},
 	extraReducers ( builder )
@@ -95,6 +103,8 @@ const hotelSlice = createSlice( {
 export const selectHotels = ( state ) => state.hotel.hotels;
 export const selectStatus = ( state ) => state.hotel.status;
 export const selectCity = ( state ) => state.hotel.cityQuery;
+export const selectStartDate = ( state ) => state.hotel.startDate;
+export const selectEndDate = ( state ) => state.hotel.endDate;
 export const selectError = ( state ) => state.hotel.error;
-export const { changeCity } = hotelSlice.actions;
+export const { changeCity, changeDate } = hotelSlice.actions;
 export default hotelSlice.reducer;

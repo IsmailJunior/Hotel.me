@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {IoFlameOutline} from 'react-icons/io5'
 import {HiOutlineMagnifyingGlass, HiOutlineBell} from 'react-icons/hi2'
 import {BsCalendar2Date, BsPersonPlus} from 'react-icons/bs'
-import {IoPeopleOutline, IoHelpBuoy} from 'react-icons/io5'
+import {IoHelpBuoy} from 'react-icons/io5'
 import {SlBasket} from 'react-icons/sl'
 export const Sidebar = () => {
   return (
@@ -37,20 +37,11 @@ export const Sidebar = () => {
           </NavItem>
         </Item>
           </Link>
-          <Link to='clients'>
-          <Item>
-          <NavItem>
-            <IoPeopleOutline size={20} />
-            <h4>My Clients</h4>
-          </NavItem>
-        </Item>
-          </Link>
-
-          <Link to='lists'>
+          <Link to='cart'>
           <Item>
           <NavItem>
             <SlBasket size={20}/>
-            <h4>MLS Lists</h4>
+            <h4>Cart</h4>
           </NavItem>
         </Item>
           </Link>

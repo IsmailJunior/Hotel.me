@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 import {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import {selectHotels, selectStatus, getHotels, selectCity, changeCity} from '../features/hotel/hotelSlice'
+import { Discuss } from 'react-loader-spinner'
+import {selectHotels, selectStatus, getHotels, selectCity, changeCity, selectStartDate, selectEndDate} from '../features/hotel/hotelSlice'
 import {selectUser, selectDisplayName} from '../features/user/userSlice'
 import { AuthCard } from '../components/AuthCard';
-export const DashboardPage = () =>
+export const TrendingPage = () =>
 {  
-  const dispatch = useDispatch()
+  const startDate = useSelector( selectStartDate );
+  const endDate = useSelector( selectEndDate );
+  const dispatch = useDispatch();
+  const status = useSelector( selectStatus );
   const hotels = useSelector( selectHotels );
   const city = useSelector(selectCity)
   const user = useSelector( selectUser )
@@ -18,7 +22,7 @@ export const DashboardPage = () =>
   }
   const content = <Container>
     
-    { hotels?.map( ( hotel ) => (
+    { status === 'loading' ? <Discuss width={90} height={90} /> : hotels?.map( ( hotel ) => (
       <Hotel key={hotel.id}>
         <Image style={ { backgroundImage: `url(${ hotel.propertyImage.image.url })` } }>
           <Name>{ hotel.name }</Name>
@@ -28,11 +32,11 @@ export const DashboardPage = () =>
     ))}
   </Container>
 
-  const cities = ['New York', 'Florida']
+  const cities = ['New York', 'Florida', 'Oregon', 'Ohio', 'Hawaii']
 
   useEffect( () =>
   {
-    dispatch(getHotels(city))
+    dispatch(getHotels({cityName: city, startDate: startDate, endDate: endDate}))
   }, [city])
   return (
     <>
@@ -71,6 +75,8 @@ const Image = styled.div`
 `;
 
 const Container = styled.div`
+  display: flex;
+  justify-content: center;
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;

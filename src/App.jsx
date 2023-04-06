@@ -10,10 +10,9 @@ import { Layout } from './layout/Layout'
 import { TrendingPage } from './Pages/TrendingPage'
 import { SearchPage } from './Pages/SearchPage'
 import { CalanderPage } from './Pages/CalanderPage'
-import {ClientsPage} from './Pages/ClientsPage'
 import {NotificationPage} from './Pages/NotificationPage'
 import { InvitePage } from './Pages/InvitePage'
-import { ListsPage } from './Pages/ListsPage'
+import { CartPage } from './Pages/CartPage'
 
 function App ()
 {
@@ -39,10 +38,9 @@ function App ()
         <Route index element={ <TrendingPage /> } />
         <Route path='search' element={<SearchPage />} />
         <Route path='calander' element={<CalanderPage />} />
-        <Route path='clients' element={<ClientsPage />} />
         <Route path='notification' element={<NotificationPage />} />
         <Route path='invite' element={<InvitePage />} />
-        <Route path='lists' element={<ListsPage />} />
+        <Route path='cart' element={<CartPage />} />
         <Route path='invite' element={<InvitePage />} />
       </Route>
     </Routes>
